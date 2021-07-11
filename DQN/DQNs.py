@@ -180,7 +180,7 @@ class DQN(object):
         
 
     def create_model(self):
-        """创建一个隐藏层为10的神经网络"""
+        """create a neural network with a hidden layer"""
         if self.dueling:
             inputA = Input(shape=(self.n_features,))
             inputB = Input(shape=(1,))
@@ -190,14 +190,6 @@ class DQN(object):
             y = x1 + (x2 - tf.reduce_mean(x2, axis=1, keepdims=True))
             model = models.Model(inputs=[inputA, inputB], outputs=y)
         else:
-            # model = models.Sequential([
-            #     layers.Dense(10, input_dim=self.n_features, activation='relu',
-            #                  kernel_initializer=initializers.RandomNormal(mean=0.0, stddev=0.3, seed=None),
-            #                  bias_initializer=initializers.Constant(value=0.1)),
-            #     layers.Dense(self.n_actions, activation="linear",
-            #                  kernel_initializer=initializers.RandomNormal(mean=0.0, stddev=0.3, seed=None),
-            #                  bias_initializer=initializers.Constant(value=0.1))
-            # ])
             inputA = Input(shape=(self.n_features,))
             inputB = Input(shape=(1,))
             x = layers.Dense(self.batch_size, activation='relu',
