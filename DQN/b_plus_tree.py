@@ -252,6 +252,7 @@ class BPlusTree(object):
             # print('lNode1', lNode1.index)
             if parent.num == 0:
                 self.root = lNode1
+                self.root.parent = None
             # print(self.root.index)
         # determine whether to merge
         elif parent.num < self.minkey:
@@ -298,6 +299,7 @@ class BPlusTree(object):
         if parent.num < self.minkey and parent.parent == None:
             if parent.num == 0:
                 self.root = iNode1
+                self.root.parent = None
         # determine whether to merge
         elif parent.num < self.minkey:
             # find the location of the index to delete in the parent node of the node
